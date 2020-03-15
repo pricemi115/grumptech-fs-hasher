@@ -1,0 +1,39 @@
+{
+  "name": "grumptech-fs-hasher",
+  "version": "1.0.0-beta.0",
+  "description": "Generates hash digests of file system folders and their contents.",
+  "main": "dist/grumptech-fs-hasher.js",
+  "files": [
+    "dist/grumptech-fs-hasher.js",
+    "test/testscript.js",
+    "test/sample_data/"
+  ],
+  "scripts": {
+    "prepublish": "npm run build",
+    "install": "mkdir ./test/output",
+    "uninstall": "rm -fR ./test/output",
+    "test-dbg": "DEBUG=fs-hasher* node ./test/testscript.js '../dist/grumptech-fs-hasher.js'",
+    "test-rel": "node ./test/testscript.js '../dist/grumptech-fs-hasher.js'",
+    "build": "rollup -c rollup.config.js"
+  },
+  "keywords": [
+    "hash",
+    "message digest",
+    "sha256",
+    "md5",
+    "sha512"
+  ],
+  "author": "GrumpTech (Michael J. Price)",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "rollup": "^1.32.1",
+    "rollup-plugin-node-polyfills": "^0.2.1"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "supports-color": "^7.1.0"
+  }
+}
