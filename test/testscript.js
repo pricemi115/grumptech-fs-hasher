@@ -15,9 +15,7 @@ const _filesystem = require('fs');
   const src1    = __dirname + '/sample_data/folder-a/folder-b/bacon_ipsum.txt';
   const src2    = __dirname + '/sample_data/folder-a/folder-b-copy/bacon_ipsum.txt';
   const src3    = __dirname + '/sample_data/folder-c/';
-  const src4    = 'booger';
   const src     = [src1, src2, src3];
-//  const src     = __dirname + '/sample_data/';
   const outdir  = __dirname + '/output/';
 
   console.log(`Initiating build: ${src}`);

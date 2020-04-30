@@ -69,8 +69,8 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
      Description:   Build a heirarchy of file system entries based upon the
                     source
 
-     @param {string} [source] - Path for the file system object.
-     @param {number} [depth]  - Depth of this object in the tree.
+     @param {string | string[]} [source] - Path for the file system object.
+     @param {number}            [depth]  - Depth of this object in the tree.
 
      @return {Promise} - A promise that when resolved will indicate if the
                          file system heirarchy was built or not.

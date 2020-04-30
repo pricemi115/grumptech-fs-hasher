@@ -20,9 +20,9 @@ export class FSTypeMismatch extends TypeError {
   /* ========================================================================
      Description: Constructor for an instance of a FSTypeMismatch error.
 
-     @param {number or Array} [expectedType or Array of expected types] - The File System Type enumerated value(s) that was expected.
-     @param {number} [observedType] - The File System Type enumerated value that was observed.
-     @param {string} [filename]     - (Optional) The name of the file raising the error.
+     @param {number or numbrt[]}  [expectedType] - The File System Type enumerated value(s) that was expected.
+     @param {number}              [observedType] - The File System Type enumerated value that was observed.
+     @param {string}              [filename]     - (Optional) The name of the file raising the error.
 
      @return {object} - An instance of the FSTypeMismatch class
      ======================================================================== */

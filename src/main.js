@@ -88,7 +88,7 @@ class FSHasherInternal {
      Description: Read-Only Property accessor to read the Root Source of the
                   source to be hashed.
 
-     @return {string} -  The file system path for the root source.
+     @return {string | string[]} -  The file system path for the root source.
      ======================================================================== */
   get Source() {
     let src = '';
@@ -102,7 +102,7 @@ class FSHasherInternal {
      Description:    Build a heirarchy of file system entries based upon the
                      root source
 
-     @param {string | Array(string)} [source] - Path(s) for the file system object.
+     @param {string | string[]} [source] - Path(s) for the file system object.
 
      @return {Promise} - A promise that when resolved will indicate if the
                          file system heirarchy was built or not.
@@ -170,6 +170,8 @@ class FSHasherInternal {
   /* ========================================================================
      Description:    Generate a message digest of the root source.
 
+     @param {string} - A string representing the hashing algorithm to use.
+
      @return {Promise} - A promise that when resolved will provide a string
                          representing the overall hash of the root source.
                          If the heirarchy has not been built or the root source is busy,
@@ -201,16 +203,17 @@ class FSHasherInternal {
                      of the hashing.
 
      @return {Promise} - A promise that when resolved will provide a string
-                         containing a CSV deliminted report. If the heirarchy has
+                         containing a CSV delimited report. If the heirarchy has
                          not been built or the root source is busy,
-                         the promise will resolve to and empty string.
+                         the promise will resolve to an empty string.
                          CSV Format:
-                         Field #1: Type   - '(D)'-Directory or ''(F)'-File
+                         Field #1: Type   - '(D)'-Directory, '(F)'-File, '(B)'-Batch
                          Field #2: Source - Path of the File System object.
                                             Will be prepended with spaces corresponding
                                             to the depth of the result item.
-                         Field #3: Digest - Hash digest of the item. If has not
-                                            been computed, will default to undefined.
+                         Field #3: Digest - Message digest of the item.
+                                            If it has not been computed,
+                                            it will default to undefined.
      ======================================================================== */
   Report() {
     return (new Promise(resolve => {
@@ -248,11 +251,11 @@ class FSHasherInternal {
      Description:    Finds duplicate file system objects.
 
      @return {Promise} - A promise that when resolved will provide a map/dictionary.
-                         The key of the dictionary will be "common" hash digest
+                         The key of the dictionary will be "common" message digest
                          and the value will be an array of strings containing
                          the sources sharing the digest. Unique items will _not_
                          be specified in the result.
-                         {key: digest, value: [sources]}
+                         {key: digest, value: source[]}
      ======================================================================== */
   FindDuplicates() {
     return (new Promise(resolve => {
@@ -487,7 +490,7 @@ export class FSHasher {
   /* ========================================================================
      Description: API Wrapper for the Source Property
 
-     @return {string} -  The file system path for the root source.
+     @return {string | string[]} -  The file system path for the root source.
      ======================================================================== */
   get Source() {
     // Get the registered object
@@ -506,7 +509,7 @@ export class FSHasher {
   /* ========================================================================
      Description:    API Wrapper for the Build Method
 
-     @param {string | Array(string)} [source] - Path(s) for the file system object.
+     @param {string | string[]} [source] - Path(s) for the file system object.
 
      @return {Promise} - A promise that when resolved will indicate if the
                          file system heirarchy was built or not.
@@ -528,6 +531,8 @@ export class FSHasher {
 
   /* ========================================================================
      Description:    API Wrapper for the Compute Method
+
+     @param {string} - A string representing the hashing algorithm to use.
 
      @return {Promise} - A promise that when resolved will provide a string
                          representing the overall hash of the root source.
@@ -552,17 +557,17 @@ export class FSHasher {
      Description:    API Wrapper for the Report Method
 
      @return {Promise} - A promise that when resolved will provide a string
-                         containing a CSV deliminted report. If the heirarchy has
+                         containing a CSV delimited report. If the heirarchy has
                          not been built or the root source is busy,
-                         the promise will resolve to and empty string.
+                         the promise will resolve to an empty string.
                          CSV Format:
-                         Field #1: Type   - '(D)'-Directory or ''(F)'-File
+                         Field #1: Type   - '(D)'-Directory, '(F)'-File, '(B)'-Batch
                          Field #2: Source - Path of the File System object.
                                             Will be prepended with spaces corresponding
                                             to the depth of the result item.
-                         Field #3: Digest - Hash digest of the item. If has not
-                                            been computed, will default to undefined.
-     ======================================================================== */
+                         Field #3: Digest - Message digest of the item.
+                                            If it has not been computed,
+                                            it will default to undefined.
   Report() {
     // Get the registered object
     const fshasher = _internalFSHashObjs.get(this);
@@ -581,11 +586,11 @@ export class FSHasher {
      Description:    API Wrapper for the FindDuplicates Method
 
      @return {Promise} - A promise that when resolved will provide a map/dictionary.
-                         The key of the dictionary will be "common" hash digest
+                         The key of the dictionary will be "common" message digest
                          and the value will be an array of strings containing
                          the sources sharing the digest. Unique items will _not_
                          be specified in the result.
-                         {key: digest, value: [sources]}
+                         {key: digest, value: source[]}
      ======================================================================== */
   FindDuplicates() {
     // Get the registered object

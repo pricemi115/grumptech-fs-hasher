@@ -117,8 +117,8 @@ export class FileSystemHashEntryBase {
      Description: Build a heirarchy of file system entries based upon the
                   source
 
-     @param {string} [source] - Path for the file system object.
-     @param {number} [depth]  - Depth of this object in the tree.
+     @param {string | string[]} [source] - Path for the file system object.
+     @param {number}            [depth]  - Depth of this object in the tree.
 
      @return {Promise} - A promise that when resolved from the base class will
                          indicate the File System Type of the source specified.
@@ -126,7 +126,7 @@ export class FileSystemHashEntryBase {
      @throws RangeError - If the depth is negative or not an integer.
      @throws TypeError  - If the depth not a number. Specifically an integer.
 
-     @remarks - If this object is busy, will resolbe to an Invalid File Syste Type.
+     @remarks - If this object is busy, will resolve to an Invalid File Syste Type.
      ======================================================================== */
   Build(source, depth) {
     if ((!typeof(depth) ==='number') || (!Number.isInteger(depth))) {
@@ -176,8 +176,7 @@ export class FileSystemHashEntryBase {
 
      @throws {FSAbstract} - Always thrown if invoked on the base class!
 
-     @remarks - Abstract property.
-
+     @remarks - Abstract method.
      ======================================================================== */
   Compute(algorithm, parentHash)
   {

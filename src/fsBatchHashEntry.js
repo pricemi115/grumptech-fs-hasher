@@ -71,9 +71,9 @@ export class BatchHashEntry extends DirectoryHashEntry {
      Description:   Build a heirarchy of file system entries based upon the
                     source
 
-     @param {string} [source] - Array containing the list of files/directories
-                                to be hashed.
-     @param {number} [depth]  - Depth of this object in the tree.
+     @param {string | string[]} [source] - Array containing the list of files/directories
+                                           to be hashed.
+     @param {number}            [depth]  - Depth of this object in the tree.
 
      @return {Promise} - A promise that when resolved will indicate if the
                          file system heirarchy was built or not.
