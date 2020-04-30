@@ -1,6 +1,6 @@
 {
   "name": "grumptech-fs-hasher",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Generates hash digests of file system folders and their contents.",
   "main": "dist/grumptech-fs-hasher.js",
   "files": [
@@ -23,6 +23,16 @@
     "md5",
     "sha512"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pricemi115/grumptech-fs-hasher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pricemi115/grumptech-fs-hasher/issues"
+  },
+  "engines": {
+    "node": ">=13.0.0"
+  },
   "author": "GrumpTech (Michael J. Price)",
   "license": "ISC",
   "devDependencies": {

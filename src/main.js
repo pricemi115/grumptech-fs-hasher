@@ -568,6 +568,7 @@ export class FSHasher {
                          Field #3: Digest - Message digest of the item.
                                             If it has not been computed,
                                             it will default to undefined.
+     ======================================================================== */
   Report() {
     // Get the registered object
     const fshasher = _internalFSHashObjs.get(this);
