@@ -1,6 +1,6 @@
 {
   "name": "grumptech-fs-hasher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generates hash digests of file system folders and their contents.",
   "main": "dist/grumptech-fs-hasher.js",
   "files": [
