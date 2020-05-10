@@ -9,7 +9,7 @@
     "test/sample_data/"
   ],
   "scripts": {
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "install": "mkdir ./test/output",
     "uninstall": "rm -fR ./test/output",
     "test-dbg": "DEBUG=fs-hasher* node ./test/testscript.js '../dist/grumptech-fs-hasher.js'",
