@@ -36,9 +36,8 @@
   "author": "GrumpTech (Michael J. Price)",
   "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^11.1.0",
-    "@rollup/plugin-json": "^4.0.2",
-    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-inject": "^4.0.1",
+    "@rollup/plugin-json": "^4.0.3",
     "rollup": "^1.32.1",
     "rollup-plugin-node-polyfills": "^0.2.1"
   },
