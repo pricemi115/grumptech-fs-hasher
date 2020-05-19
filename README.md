@@ -1,6 +1,6 @@
 # GrumpTech-FS-Hasher
 
-A JavaSctipt node module for for producing message digests of files and directories. The message digest of a directory is computed as the hash of the message digests of all of the contents of the directory.
+A JavaScript node module for for producing message digests of files and directories. The message digest of a directory is computed as the hash of the message digests of all of the contents of the directory.
 
 ## Installation
 > npm install grumptech-fs-hasher
