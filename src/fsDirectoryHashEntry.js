@@ -232,6 +232,21 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
             // Wait for the computations to complete
             const results = await Promise.all(childComputePromises);
 
+            // For a consistent, name-agostic message digest
+            // sort the results alpha-numerically.
+            results.sort((a, b) => {
+              // Assume equality
+              let sortResult = 0;
+              if (a.digest < b.digest) {
+                sortResult = -1;
+              }
+              else if (a.digest > b.digest) {
+                sortResult = 1;
+              }
+
+              return sortResult;
+            });
+
             // Compute my hash.
             // -----------------------------------------
             // Create the worker hash.
