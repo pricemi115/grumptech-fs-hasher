@@ -38,7 +38,7 @@ The FSHasher object provides the interface below
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@return {string | string[]}:
 
 > **Build**:
-<br>Constructs a hierarchy of files an directories to be hashed.  
+<br>Constructs a hierarchy of files and directories to be hashed.  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@parm {string | string[]} [source]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@return  {Promise(boolean)} - A promise that when resolved will indicate if the file system heirarchy was built or not. true if built. false otherwise.
 
