@@ -1,6 +1,6 @@
 {
   "name": "grumptech-fs-hasher",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generates hash digests of file system folders and their contents.",
   "main": "dist/grumptech-fs-hasher.js",
   "files": [
@@ -9,11 +9,19 @@
     "test/sample_data/"
   ],
   "scripts": {
-    "prepare": "npm run build",
-    "install": "mkdir ./test/output",
-    "uninstall": "rm -fR ./test/output",
-    "test-dbg": "DEBUG=fs-hasher* node ./test/testscript.js '../dist/grumptech-fs-hasher.js'",
-    "test-rel": "node ./test/testscript.js '../dist/grumptech-fs-hasher.js'",
+    "prepare": "npm run build",   
+    "install": "run-script-os",
+    "install:win32": "mkdir .\\test\\output",
+    "install:default": "mkdir ./test/output",   
+    "uninstall": "run-script-os",
+    "uninstall:win32": "rd /S /Q .\\test\\output",
+    "uninstall:default": "rm -fR ./test/output",
+    "test-dbg": "run-script-os",
+    "test-dbg:win32": "DEBUG=fs-hasher* node .\\test\\testscript.js ..\\dist\\grumptech-fs-hasher.js",
+    "test-dbg:default": "DEBUG=fs-hasher* node ./test/testscript.js ../dist/grumptech-fs-hasher.js",
+    "test-rel": "run-script-os",
+    "test-rel:win32": "node .\\test\\testscript.js ..\\dist\\grumptech-fs-hasher.js",
+    "test-rel:default": "node ./test/testscript.js ../dist/grumptech-fs-hasher.js",
     "build": "rollup -c rollup.config.js"
   },
   "keywords": [
@@ -43,6 +51,7 @@
   },
   "dependencies": {
     "debug": "^4.1.1",
+    "run-script-os": "^1.1.5",
     "supports-color": "^7.1.0"
   }
 }
