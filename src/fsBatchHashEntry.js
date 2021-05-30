@@ -7,10 +7,11 @@
 'use strict';
 
 // External dependencies and imports.
+// eslint-disable-next-line no-unused-vars
 const _debug = require('debug')('fs-hasher_hashBatch');
 
 // Internal dependencies
-import { FSTypeMismatch, FSHashError }                from './fsHashErrors.js';
+import { FSTypeMismatch }                             from './fsHashErrors.js';
 import { FileSystemHashEntryBase, FILE_SYSTEM_TYPES } from './fsHashEntryBase.js';
 import { DirectoryHashEntry }                         from './fsDirectoryHashEntry.js'
 import { FileHashEntry }                              from './fsFileHashEntry.js';
@@ -146,10 +147,13 @@ export class BatchHashEntry extends DirectoryHashEntry {
 
                     case FILE_SYSTEM_TYPES.BATCH:
                     // Break intentionally missing
+                    // eslint-disable-next-line no-fallthrough
                     case FILE_SYSTEM_TYPES.OTHER:
                     // Break intentionally missing
+                    // eslint-disable-next-line no-fallthrough
                     case FILE_SYSTEM_TYPES.INVALID:
                     // Break intentionally missing
+                    // eslint-disable-next-line no-fallthrough
                     default:
                     {
                       // Nothing to do.

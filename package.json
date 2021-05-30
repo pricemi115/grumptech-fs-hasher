@@ -9,10 +9,10 @@
     "test/sample_data/"
   ],
   "scripts": {
-    "prepare": "npm run build",   
+    "prepare": "npm run build",
     "install": "run-script-os",
     "install:win32": "mkdir .\\test\\output",
-    "install:default": "mkdir ./test/output",   
+    "install:default": "mkdir ./test/output",
     "uninstall": "run-script-os",
     "uninstall:win32": "rd /S /Q .\\test\\output",
     "uninstall:default": "rm -fR ./test/output",
@@ -46,6 +46,7 @@
   "devDependencies": {
     "@rollup/plugin-inject": "^4.0.1",
     "@rollup/plugin-json": "^4.0.3",
+    "eslint": "^7.27.0",
     "rollup": "^1.32.1",
     "rollup-plugin-node-polyfills": "^0.2.1"
   },

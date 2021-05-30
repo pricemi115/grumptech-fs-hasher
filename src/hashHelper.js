@@ -12,7 +12,7 @@ import * as modFileSystem from 'fs';
 import * as modCrypto     from 'crypto';
 
 // Internal dependencies
-import { FSTypeMismatch, FSHashError } from './fsHashErrors.js';
+import { FSNotCreatable } from './fsHashErrors.js';
 
 // Enumeration of status codes for hashing operations.
 export const HASH_STATUS = {
@@ -210,13 +210,14 @@ class InternalHashWorker extends EventEmitter {
               // Use the default options when falling readFile().
               // Will use encoding=null & flag='r'
               this._myStreamReader = modFileSystem.createReadStream(this._request.Source, {encoding:null, flag:'r', emitClose:true});
-              this._myStreamReader.once('open', (fd) => {
+              // eslint-disable-next-line no-unused-vars
+              this._myStreamReader.once('open', (_fd) => {
                 // Able to open the stream.
                 resolve(HASH_STATUS.STATUS_OK);
               });
               this._myStreamReader.once('error', (err) => {
                 let status = HASH_STATUS.STATUS_ERR_OTHER;
-                if (err.hasOwnProperty('code')) {
+                if (Object.prototype.hasOwnProperty.call(err, 'code')) {
                   if (err.code === 'EMFILE') {
                     // This is a recoverable error, once resorces free up
                     status = HASH_STATUS.STATUS_TOO_MANY_FILES_OPEN;
@@ -449,9 +450,6 @@ class InternalFileHasherSerializer extends EventEmitter {
   _workerDone(args) {
     if ((args !== undefined) && (typeof(args) === 'object') &&
         (args.item instanceof InternalHashWorker)) {
-
-      const initialLength = this._pendingList.length;
-      const src = args.item._request.Source;
 
       // Clean up
       const worker = args.item;

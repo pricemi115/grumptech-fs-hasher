@@ -6,6 +6,7 @@
 'use strict';
 
 // External dependencies and imports.
+// eslint-disable-next-line no-unused-vars
 const _debug = require('debug')('fs-hasher_hashDir');
 import * as modPath                       from 'path';
 import { promises as _filesystemPromise } from 'fs';
@@ -129,10 +130,13 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
 
                     case FILE_SYSTEM_TYPES.OTHER:
                     // Break intentionally missing
+                    // eslint-disable-next-line no-fallthrough
                     case FILE_SYSTEM_TYPES.BATCH:
                     // Break intentionally missing
+                    // eslint-disable-next-line no-fallthrough
                     case FILE_SYSTEM_TYPES.INVALID:
                     // Break intentionally missing
+                    // eslint-disable-next-line no-fallthrough
                     default:
                     {
                       // Nothing to do.
@@ -386,13 +390,16 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
 
               case FILE_SYSTEM_TYPES.INVALID:
               // break intentionally missing
+              // eslint-disable-next-line no-fallthrough
               case FILE_SYSTEM_TYPES.OTHER:
               // break intentionally missing
+              // eslint-disable-next-line no-fallthrough
               default:
               {
                 // Not a valid child.
                 throw new FSTypeMismatch([FILE_SYSTEM_TYPES.DIRECTORY, FILE_SYSTEM_TYPES.FILE], FILE_SYSTEM_TYPES.INVALID, "fsDirectoryHashEntry.js");
               }
+              // eslint-disable-next-line no-unreachable
               break;
             }
       }

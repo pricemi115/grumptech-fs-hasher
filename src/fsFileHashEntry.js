@@ -6,12 +6,13 @@
 'use strict';
 
 // External dependencies and imports.
+// eslint-disable-next-line no-unused-vars
 const _debug = require('debug')('fs-hasher_hashFile');
 
 // Internal dependencies
-import { FSTypeMismatch, FSHashError }                    from './fsHashErrors.js';
+import { FSTypeMismatch }                                 from './fsHashErrors.js';
 import { FileSystemHashEntryBase, FILE_SYSTEM_TYPES }     from './fsHashEntryBase.js';
-import { HASH_STATUS, HashRequest, FileHasherSerializer}  from './hashHelper.js';
+import { HashRequest, FileHasherSerializer}               from './hashHelper.js';
 
 /* ==========================================================================
    Class:              FileHashEntry

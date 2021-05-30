@@ -7,6 +7,7 @@
 
 
 // External dependencies and imports.
+// eslint-disable-next-line no-unused-vars
 const _debug = require('debug')('fs-hasher_errors');
 
 /* ==========================================================================
@@ -199,7 +200,7 @@ export class FSHashError extends TypeError {
 
      @return {string} - name of the file when raising this error.
      ======================================================================== */
-  get ErrorDetail() {
+  get Filename() {
     return ( this._filename );
   }
 }

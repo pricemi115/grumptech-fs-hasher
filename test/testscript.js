@@ -32,7 +32,8 @@ const _filesystem = require('fs');
 
   console.log(`\n\nInitiating report`);
   const report = await fsHasher.Report();
-  _filesystem.writeFile(outdir + 'fsHashOutput.csv', report, (err) => {
+  // eslint-disable-next-line no-unused-vars
+  _filesystem.writeFile(outdir + 'fsHashOutput.csv', report, (_err) => {
   });
   console.log(`Report complete`);
 
@@ -41,7 +42,7 @@ const _filesystem = require('fs');
   if (duplicates && (duplicates.size > 0)) {
     // Generate a CSV file of the duplicates.
     const writeStream = _filesystem.createWriteStream(outdir + 'fsHashDups.csv');
-    duplicates.forEach((value, key, map) => {
+    duplicates.forEach((value, key) => {
       if (value && Array.isArray(value) && (value.length>1)) {
         writeStream.write(`${value.length};${key};${value[0]}\n`);
         for (let index=1; index < value.length; index++) {
