@@ -6,7 +6,11 @@
   "files": [
     "dist/grumptech-fs-hasher.js",
     "test/testscript.js",
-    "test/sample_data/"
+    "test/sample_data/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE.md",
+    "SECURITY.md"
   ],
   "scripts": {
     "prepare": "npm run build",
