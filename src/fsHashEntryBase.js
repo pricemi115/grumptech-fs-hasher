@@ -7,12 +7,13 @@
 'use strict';
 
 // External dependencies and imports.
+// eslint-disable-next-line no-unused-vars
 const _debug = require('debug')('fs-hasher_hashBase');
 import * as modFileSystem                  from 'fs';
 import { promises as _fileSystemPromises } from 'fs';
 
 // Internal dependencies
-import { FSAbstract } from './fsHashErrors.js';
+import { FSAbstract, FSTypeMismatch } from './fsHashErrors.js';
 
 /* Enumeration for hashing algorithms */
 export const FILE_SYSTEM_TYPES = {
@@ -178,7 +179,8 @@ export class FileSystemHashEntryBase {
 
      @remarks - Abstract method.
      ======================================================================== */
-  Compute(algorithm, parentHash)
+  // eslint-disable-next-line no-unused-vars
+  Compute(_algorithm, _parentHash)
   {
     // Abstract function.
     const error = new FSAbstract("FileSystemHashEntryBase::Compute");

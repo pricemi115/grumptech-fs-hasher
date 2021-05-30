@@ -147,8 +147,10 @@ class FSHasherInternal {
 
           case FILE_SYSTEM_TYPES.OTHER:
           // Break intentionally missing
+          // eslint-disable-next-line no-fallthrough
           case FILE_SYSTEM_TYPES.INVALID:
           // Break intentionally missing
+          // eslint-disable-next-line no-fallthrough
           default:
           {
             // Nothing to do.
@@ -293,7 +295,7 @@ class FSHasherInternal {
 
               // Generate the map to be returned that contains only repeated items.
               const duplicatesMap = new Map();
-              internalMap.forEach((value, key, map) => {
+              internalMap.forEach((value, key) => {
                 if (value && Array.isArray(value) && (value.length > 1)) {
                   // Duplicate found.
                   duplicatesMap.set(key, value);
@@ -396,6 +398,7 @@ class FSHasherInternal {
        {
          throw new FSTypeMismatch([FILE_SYSTEM_TYPES.DIRECTORY, FILE_SYSTEM_TYPES.FILE, FILE_SYSTEM_TYPES.BATCH], type, "main.js");
        }
+       // eslint-disable-next-line no-unreachable
        break;
      }
 
