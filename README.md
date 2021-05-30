@@ -64,3 +64,6 @@ The FSHasher object provides the interface below
 > **FindDuplicates**:
 <br>Finds duplicate file system objects.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@return  {Promise(Map{key:digest, value:source[]))} - A promise that when resolved will provide a map/dictionary. The key of the dictionary will be "common" message digest and the value will be an array of strings containing the sources sharing the digest. Unique items will _not_ be specified in the result.
+
+## License
+Refer to [LICENSE.md](./LICENSE.md) for information regarding licensincg of this source code.
