@@ -1,6 +1,6 @@
 {
   "name": "grumptech-fs-hasher",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generates hash digests of file system folders and their contents.",
   "main": "dist/grumptech-fs-hasher.js",
   "files": [
@@ -35,6 +35,7 @@
     "md5",
     "sha512"
   ],
+  "homepage": "https://pricemi115.github.io/grumptech-fs-hasher",
   "repository": {
     "type": "git",
     "url": "https://github.com/pricemi115/grumptech-fs-hasher.git"
