@@ -1,19 +1,69 @@
-/* ==========================================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>fsHashEntryBase.mjs - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/pricemi115/homebridge-grumptech-netnanny" target="_blank" >GrumpTech</a></h2><h3>Tutorials</h3><ul><li><a href="tutorial-license.html">license</a></li><li><a href="tutorial-security.html">security</a></li></ul><h3>Global</h3><ul><li><a href="global.html#__dirname">__dirname</a></li><li><a href="global.html#__filename">__filename</a></li><li><a href="global.html#_debug">_debug</a></li><li><a href="global.html#_getPackageInfo">_getPackageInfo</a></li><li><a href="global.html#_PackageInfo">_PackageInfo</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">fsHashEntryBase.mjs</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* ==========================================================================
    File:               fsHashEntryBase.js
    Description:	       Module serving as the base class for file system
                        hashing results.
    Copyright:          Mar 2020
    ========================================================================== */
-'use strict';
 
 // External dependencies and imports.
-// eslint-disable-next-line no-unused-vars
-const _debug = require('debug')('fs-hasher_hashBase');
+import _debugModule from 'debug';
 import * as modFileSystem                  from 'fs';
 import { promises as _fileSystemPromises } from 'fs';
 
 // Internal dependencies
-import { FSAbstract, FSTypeMismatch } from './fsHashErrors.js';
+import { FSAbstract, FSTypeMismatch } from './fsHashErrors.mjs';
+
+/**
+  * @private
+  * @description Debugging function pointer for runtime related diagnostics.
+  */
+const _debug = _debugModule('fs-hasher_hashBase');
 
 /* Enumeration for hashing algorithms */
 export const FILE_SYSTEM_TYPES = {
@@ -133,7 +183,7 @@ export class FileSystemHashEntryBase {
     if ((!typeof(depth) ==='number') || (!Number.isInteger(depth))) {
       throw new TypeError(`Depth must be an integer`);
     }
-    if (depth < 0) {
+    if (depth &lt; 0) {
       throw new RangeError(`Hash entry depth must be a positive integer. Depth:${depth}`);
     }
 
@@ -165,7 +215,7 @@ export class FileSystemHashEntryBase {
                      updates the digest of the directory containing this file.
 
      @param {string} [algorithm] - Hashing algorithm to use.
-     @param {<Hash>} [parentHash]- Hash object provided by the parent.
+     @param {&lt;Hash>} [parentHash]- Hash object provided by the parent.
 
      @return {Promise} - A promise that when resolved will provide the digests
                          of this item and the parent as an object
@@ -206,7 +256,7 @@ export class FileSystemHashEntryBase {
   Report() {
     return (new Promise(resolve => {
 
-      if (this.Source && (typeof(this.Source) === "string") && (this.Source.length > 0) &&
+      if (this.Source &amp;&amp; (typeof(this.Source) === "string") &amp;&amp; (this.Source.length > 0) &amp;&amp;
           !this.IsBusy) {
             this._busy = true;
 
@@ -245,7 +295,7 @@ export class FileSystemHashEntryBase {
               compute process.
     ======================================================================== */
   set _Digest(digest) {
-    if (digest && typeof(digest) !== 'string') {
+    if (digest &amp;&amp; typeof(digest) !== 'string') {
       throw new FSTypeMismatch(['string', 'falsy'], typeof(digest), "fsHashEntryBase.js");
     }
 
@@ -305,7 +355,7 @@ export class FileSystemHashEntryBase {
                if (item) {
                  if (typeof(item) === 'string') {
                    const fsType = await FileSystemHashEntryBase._getFileSystemType(item);
-                   if ((fsType !== FILE_SYSTEM_TYPES.FILE) &&
+                   if ((fsType !== FILE_SYSTEM_TYPES.FILE) &amp;&amp;
                        (fsType !== FILE_SYSTEM_TYPES.DIRECTORY)) {
                      // Contents of the array do not conform.
                      result = FILE_SYSTEM_TYPES.INVALID;
@@ -332,3 +382,32 @@ export class FileSystemHashEntryBase {
      }));
    }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

@@ -4,17 +4,21 @@
                        hashing results.
    Copyright:          Apr 2020
    ========================================================================== */
-'use strict';
 
 // External dependencies and imports.
-// eslint-disable-next-line no-unused-vars
-const _debug = require('debug')('fs-hasher_hashBatch');
+import _debugModule from 'debug';
 
 // Internal dependencies
-import { FSTypeMismatch }                             from './fsHashErrors.js';
-import { FileSystemHashEntryBase, FILE_SYSTEM_TYPES } from './fsHashEntryBase.js';
-import { DirectoryHashEntry }                         from './fsDirectoryHashEntry.js'
-import { FileHashEntry }                              from './fsFileHashEntry.js';
+import { FSTypeMismatch }                             from './fsHashErrors.mjs';
+import { FileSystemHashEntryBase, FILE_SYSTEM_TYPES } from './fsHashEntryBase.mjs';
+import { DirectoryHashEntry }                         from './fsDirectoryHashEntry.mjs'
+import { FileHashEntry }                              from './fsFileHashEntry.mjs';
+
+ /**
+ * @private
+ * @description Debugging function pointer for runtime related diagnostics.
+ */
+  const _debug = _debugModule('fs-hasher_hashBatch');
 
 /* ==========================================================================
    Class:              BatchHashEntry

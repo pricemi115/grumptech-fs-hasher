@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "Generates hash digests of file system folders and their contents.",
   "main": "dist/grumptech-fs-hasher.js",
+  "type": "module",
   "files": [
     "dist/grumptech-fs-hasher.js",
     "test/testscript.js",
@@ -20,13 +21,12 @@
     "uninstall": "run-script-os",
     "uninstall:win32": "rd /S /Q .\\test\\output",
     "uninstall:default": "rm -fR ./test/output",
-    "test-dbg": "run-script-os",
-    "test-dbg:win32": "DEBUG=fs-hasher* node .\\test\\testscript.js ..\\dist\\grumptech-fs-hasher.js",
-    "test-dbg:default": "DEBUG=fs-hasher* node ./test/testscript.js ../dist/grumptech-fs-hasher.js",
-    "test-rel": "run-script-os",
-    "test-rel:win32": "node .\\test\\testscript.js ..\\dist\\grumptech-fs-hasher.js",
-    "test-rel:default": "node ./test/testscript.js ../dist/grumptech-fs-hasher.js",
-    "build": "rollup -c rollup.config.js"
+    "clean": "setopt localoptions rmstarsilent; rm -rf ./dist/*; rm -rf ./docs/*",
+    "build_dbg": "npm run clean; npx webpack --mode=development",
+    "build": "npm run clean; npm run docs; npx webpack --mode=production",
+    "docs": "docDir='./docs'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; mkdir -p ./pages; wait; cp ./security.md ./pages/; wait; cp ./license.md ./pages/; wait; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\"",
+    "docs-dev": "docDir='./docs-dev'; [[ -e \"$docDir\" ]] && rm -rf \"$docDir/\"*; mkdir -p ./pages; wait; cp ./security.md ./pages/; cp ./license.md ./pages/; npx jsdoc -c ./jsdoc.conf.json --destination \"$docDir/\" --private",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "keywords": [
     "hash",
@@ -48,7 +48,12 @@
   },
   "author": "GrumpTech (Michael J. Price)",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "jest-environment-node",
+    "transform": {}
+  },
   "devDependencies": {
+    "docdash": "^1.2.0",
     "eslint": "^8.25.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.26.0",

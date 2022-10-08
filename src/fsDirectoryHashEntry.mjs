@@ -3,19 +3,23 @@
    Description:	       Module handling directory file system hashing results.
    Copyright:          Mar 2020
    ========================================================================== */
-'use strict';
 
 // External dependencies and imports.
-// eslint-disable-next-line no-unused-vars
-const _debug = require('debug')('fs-hasher_hashDir');
+import _debugModule from 'debug';
 import * as modPath                       from 'path';
 import { promises as _filesystemPromise } from 'fs';
 import * as modCrypto                     from 'crypto';
 
 // Internal dependencies
-import { FSTypeMismatch, FSHashError }                from './fsHashErrors.js';
-import { FileSystemHashEntryBase, FILE_SYSTEM_TYPES } from './fsHashEntryBase.js';
-import { FileHashEntry }                              from './fsFileHashEntry.js';
+import { FSTypeMismatch, FSHashError }                from './fsHashErrors.mjs';
+import { FileSystemHashEntryBase, FILE_SYSTEM_TYPES } from './fsHashEntryBase.mjs';
+import { FileHashEntry }                              from './fsFileHashEntry.mjs';
+
+ /**
+ * @private
+ * @description Debugging function pointer for runtime related diagnostics.
+ */
+  const _debug = _debugModule('fs-hasher_hashDir');
 
 /* ==========================================================================
    Class:              DirectoryHashEntry

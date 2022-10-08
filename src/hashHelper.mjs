@@ -3,16 +3,21 @@
    Description:	       Module responsible for performing hashing of files.
    Copyright:          Apr 2020
    ========================================================================== */
-'use strict';
 
 // External dependencies and imports.
-const _debug = require('debug')('fs-hasher_hashHelper');
+import _debugModule from 'debug';
 import { EventEmitter }   from 'events';
 import * as modFileSystem from 'fs';
 import * as modCrypto     from 'crypto';
 
 // Internal dependencies
-import { FSNotCreatable } from './fsHashErrors.js';
+import { FSNotCreatable } from './fsHashErrors.mjs';
+
+/**
+  * @private
+  * @description Debugging function pointer for runtime related diagnostics.
+  */
+const _debug = _debugModule('fs-hasher_hashHelper');
 
 // Enumeration of status codes for hashing operations.
 export const HASH_STATUS = {
