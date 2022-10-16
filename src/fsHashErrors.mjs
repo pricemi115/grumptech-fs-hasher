@@ -1,209 +1,180 @@
-/* ==========================================================================
-   File:               fsHashErrors.js
-   Description:	       Module for all FS Hasher errors.
-   Copyright:          Mar 2020
-   ========================================================================== */
+/**
+ * @description Module for all FS Hasher errors.
+ * @copyright 2020-2022
+ * @author Mike Price <dev.grumptech@gmail.com>
+ * @module FSHashErrorsModule
+ * @requires debug
+ * @see {@link https://github.com/debug-js/debug#readme}
+ * @requires is-it-check
+ * @see {@link https://github.com/evdama/is-it-check}
+ */
 
 // External dependencies and imports.
 import _debugModule from 'debug';
 
 /**
-  * @private
-  * @description Debugging function pointer for runtime related diagnostics.
-  */
+ * @private
+ * @description Debugging function pointer for runtime related diagnostics.
+ */
+// eslint-disable-next-line no-unused-vars
 const _debug = _debugModule('fs-hasher_errors');
 
-/* ==========================================================================
-   Class:              FSTypeMismatch
-   Description:	       Object to use that reports errors relating to file
-                       system type mismatches.
-   Copyright:          Mar 2020
-
-   ========================================================================== */
+/**
+ * @description Reports errors relating to file system type mismatches.
+ * @augments TypeError
+ */
 export class FSTypeMismatch extends TypeError {
-  /* ========================================================================
-     Description: Constructor for an instance of a FSTypeMismatch error.
+    /**
+     * @description Constructor
+     * @param {number | number[]} expectedType - The File System Type enumerated value(s) that was expected.
+     * @param {number} observedType - The File System Type enumerated value that was observed.
+     * @param {string} [filename] - The name of the file raising the error.
+     */
+    constructor(expectedType, observedType, filename) {
+        // Initialize the base class.
+        super(`File System Type Mismatch. Expected:${expectedType} Observed:${observedType}`, filename);
 
-     @param {number or numbrt[]}  [expectedType] - The File System Type enumerated value(s) that was expected.
-     @param {number}              [observedType] - The File System Type enumerated value that was observed.
-     @param {string}              [filename]     - (Optional) The name of the file raising the error.
+        // Set the members.
+        this._expectedType = expectedType;
+        this._observedType = observedType;
+    }
 
-     @return {object} - An instance of the FSTypeMismatch class
-     ======================================================================== */
-  constructor(expectedType, observedType, filename) {
+    /**
+     * @description Read-Only Property for the expected File System Type
+     * @returns {number} - Enumerated value of the expected File System Type
+     */
+    get ExpectedType() {
+        return ( this._expectedType );
+    }
 
-    // Initialize the base class.
-    super(`File System Type Mismatch. Expected:${expectedType} Observed:${observedType}`,
-          filename);
-
-    // Set the members.
-    this._expectedType = expectedType;
-    this._observedType = observedType;
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the expected File System Type
-
-     @return {number} - Enumerated value of the expected File System Type
-     ======================================================================== */
-  get ExpectedType() {
-    return ( this._expectedType );
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the observed File System Type
-
-     @return {number} - Enumerated value of the observed File System Type
-     ======================================================================== */
-  get ObservedType() {
-    return ( this._observedType );
-  }
+    /**
+     * @description Read-Only Property for the observed File System Type
+     * @returns {number} - Enumerated value of the observed File System Type
+     */
+    get ObservedType() {
+        return ( this._observedType );
+    }
 }
 
-/* ==========================================================================
-   Class:              FSAbstract
-   Description:	       Error when attempting to instanciate an abstract
-                       (non-instancable) class or invoke an abstract function.
-   Copyright:          Mar 2020
-
-   ========================================================================== */
+/**
+ * @description Reports errors relating to instantiation of an abstract (non-instancable) class or invocation an abstract function.
+ * @augments TypeError
+ */
 export class FSAbstract extends TypeError {
-  /* ========================================================================
-     Description: Constructor for an instance of a FSAbstract error.
+    /**
+     * @description Constructor
+     * @param {string} [name="Not Specified"] -  The name of the class being instanciated or function being invoked.
+     */
+    constructor(name = 'Not Specified') {
+        // Initialize the base class.
+        super(`Attempting to instanciate an abstract class or call an abstract function: '${name}'`);
 
-     @param {string} [name] - (Optional) The name of the class being instanciated
-                                         or function being called.
+        // Set the members.
+        this._name = name;
+    }
 
-     @return {object} - An instance of the FSAbstract class
-     ======================================================================== */
-  constructor(name = "Not Specified") {
-    // Initialize the base class.
-    super(`Attempting to instanciate an abstract class or call an abstract function: '${name}'`);
-
-    // Set the members.
-    this._name = name;
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the name of the abstract class or function
-
-     @return {string} - name of the class being instanciated or function being invoked.
-     ======================================================================== */
-  get Name() {
-    return ( this._name );
-  }
+    /**
+     * @description Read-Only Property for the name of the abstract class or function
+     * @returns {string} - Name of the class being instanciated or function being invoked.
+     */
+    get Name() {
+        return ( this._name );
+    }
 }
 
-/* ==========================================================================
-   Class:              FSNotCreatable
-   Description:	       Error when attempting to instanciate a non-creatable class.
-   Copyright:          Mar 2020
-
-   ========================================================================== */
+/**
+ * @description Reports errors relating to instantiation of a non-creatable class.
+ * @augments TypeError
+ */
 export class FSNotCreatable extends TypeError {
-  /* ========================================================================
-     Description: Constructor for an instance of a FSAbstract error.
+    /**
+     * @description Constructor
+     * @param {string} [name="Not Specified"] -  The name of the class being instanciated.
+     */
+    constructor(name = 'Not Specified') {
+        // Initialize the base class.
+        super(`Attempting to instanciate an non-creatable class: '${name}'`);
 
-     @param {string} [name] - (Optional) The name of the class being instanciated
-                                         or function being called.
-                              Default: "Not Specified"
+        // Set the members.
+        this._name = name;
+    }
 
-     @return {object} - An instance of the FSNotCreatable class
-     ======================================================================== */
-  constructor(name = "Not Specified") {
-    // Initialize the base class.
-    super(`Attempting to instanciate an non-creatable class: '${name}'`);
-
-    // Set the members.
-    this._name = name;
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the name of the abstract class or function
-
-     @return {string} - name of the class being instanciated or function being invoked.
-     ======================================================================== */
-  get Name() {
-    return ( this._name );
-  }
+    /**
+     * @description Read-Only Property for the name of the non-creatable class
+     * @returns {string} - Name of the class being instanciated.
+     */
+    get Name() {
+        return ( this._name );
+    }
 }
 
-/* ==========================================================================
-   Class:              FSHashError
-   Description:	       Error when attempting to generate a hash
-   Copyright:          Mar 2020
-
-   ========================================================================== */
+/**
+ * @description Reports errors when attempting to generate a hash.
+ * @augments TypeError
+ */
 export class FSHashError extends TypeError {
-  /* ========================================================================
-     Description: Constructor for an instance of a hash entry.
+    /**
+     * @description Constructor
+     * @param {string} [source=null] - The name of the source being hashed.
+     * @param {string} [algorithm=null] - The algorithm used for hashing.
+     * @param {string} [errDetail=null] - Error detail.
+     * @param {string} [filename=null] - File generating the error.
+     */
+    constructor(source=null, algorithm=null, errDetail=null, filename=null) {
+        // Initialize the base class.
+        let msg = `Error encountered when computing the hash.`;
 
-     @param {string} [source]     - (Optional) The name of the source being hashed.
-     @param {string} [algotithm]  - (Optional) The algorithm used for hashing.
-     @param {string} [err_detail] - (Optional) Error detail.
-     @param {string} [filename]   - (Optional) File generating the error.
+        // Append source.
+        if ((source) && (typeof(source) === 'string') ) {
+            msg = msg.concat(` Source:'${source}'`);
+        }
+        // Append algorithm.
+        if ((algorithm) && (typeof(algorithm) === 'string') ) {
+            msg = msg.concat(` Algorithm:'${algorithm}'`);
+        }
+        // Append error detail.
+        if ((errDetail) && (typeof(errDetail) === 'string') ) {
+        // Append source.
+            msg = msg.concat(` Error Detail:'${errDetail}'`);
+        }
+        super(msg, filename);
 
-     @return {object} - An instance of the FSHashError class
-     ======================================================================== */
-  constructor(source=null, algorithm=null, err_detail=null, filename=null) {
-    // Initialize the base class.
-    let msg = `Error encountered when computing the hash.`;
-
-    // Append source.
-    if ((source) && (typeof(source) === 'string') ) {
-      msg = msg.concat(` Source:'${source}'`);
+        // Set the members.
+        this._source      = source;
+        this._algorithm   = algorithm;
+        this._err_detail  = errDetail;
+        this._filename    = filename;
     }
-    // Append algorithm.
-    if ((algorithm) && (typeof(algorithm) === 'string') ) {
-      msg = msg.concat(` Algorithm:'${algorithm}'`);
+
+    /**
+     * @description Read-Only Property for the source.
+     * @returns {string} - source used when hashing error was encountered.
+     */
+    get Source() {
+        return ( this._source );
     }
-    // Append error detail.
-    if ((err_detail) && (typeof(err_detail) === 'string') ) {
-      // Append source.
-      msg = msg.concat(` Error Detail:'${err_detail}'`);
+
+    /**
+     * @description Read-Only Property for the algorithm.
+     * @returns {string} - algorithm used when hashing error was encountered.
+     */
+    get Algorithm() {
+        return ( this._algorithm );
     }
-    super(msg, filename);
 
-    // Set the members.
-    this._source      = source;
-    this._algorithm   = algorithm;
-    this._err_detail  = err_detail;
-    this._filename    = filename;
-  }
+    /**
+     * @description Read-Only Property for the error detail.
+     * @returns {string} - specific detailed error when hashing error was encountered.
+     */
+    get ErrorDetail() {
+        return ( this._err_detail );
+    }
 
-  /* ========================================================================
-     Description: Read-Only Property for the source.
-
-     @return {string} - source used when hashing error was encountered.
-     ======================================================================== */
-  get Source() {
-    return ( this._source );
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the algorithm.
-
-     @return {string} - algorithm used when hashing error was encountered.
-     ======================================================================== */
-  get Algorithm() {
-    return ( this._algorithm );
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the error detail.
-
-     @return {string} - specific detailed error when hashing error was encountered.
-     ======================================================================== */
-  get ErrorDetail() {
-    return ( this._err_detail );
-  }
-
-  /* ========================================================================
-     Description: Read-Only Property for the filename.
-
-     @return {string} - name of the file when raising this error.
-     ======================================================================== */
-  get Filename() {
-    return ( this._filename );
-  }
+    /**
+     * @description Read-Only Property for the filename.
+     * @returns {string} - name of the file when raising this error.
+     */
+    get Filename() {
+        return ( this._filename );
+    }
 }
