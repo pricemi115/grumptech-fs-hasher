@@ -3,13 +3,16 @@
  * @copyright 2020-2022
  * @author Mike Price <dev.grumptech@gmail.com>
  * @module FSHashEntryBaseModule
+ * @private
  * @requires debug
  * @see {@link https://github.com/debug-js/debug#readme}
  * @requires is-it-check
  * @see {@link https://github.com/evdama/is-it-check}
  */
 
-// External dependencies and imports.
+/**
+ * @description External dependencies and imports.
+ */
 import _debugModule from 'debug';
 
 // Internal dependencies
@@ -28,6 +31,7 @@ const _debug = _debugModule('fs-hasher_hashFile');
 /**
  * @description Handles hashing of files.
  * @augments FileSystemHashEntryBase
+ * @private
  */
 export class FileHashEntry extends FileSystemHashEntryBase {
     /**

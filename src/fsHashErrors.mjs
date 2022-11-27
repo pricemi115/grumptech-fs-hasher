@@ -9,7 +9,9 @@
  * @see {@link https://github.com/evdama/is-it-check}
  */
 
-// External dependencies and imports.
+/**
+ * @description External dependencies and imports.
+ */
 import _debugModule from 'debug';
 import _is from 'is-it-check';
 

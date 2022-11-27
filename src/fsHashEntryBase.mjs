@@ -3,6 +3,7 @@
  * @copyright 2020-2022
  * @author Mike Price <dev.grumptech@gmail.com>
  * @module FSHashEntryBaseModule
+ * @private
  * @requires debug
  * @see {@link https://github.com/debug-js/debug#readme}
  * @requires fs
@@ -11,7 +12,9 @@
  * @see {@link https://github.com/evdama/is-it-check}
  */
 
-// External dependencies and imports.
+/**
+ * @description External dependencies and imports.
+ */
 import {Hash} from 'crypto';
 import _debugModule from 'debug';
 import * as modFileSystem                from 'fs';
@@ -53,6 +56,7 @@ export const FILE_SYSTEM_TYPES = {
  * @description - Serves as the base class for file system entries to compure
                   file system hash results. This base class also serves
                   when the file system object is a readable file.
+ * @private
  */
 export class FileSystemHashEntryBase {
     /**

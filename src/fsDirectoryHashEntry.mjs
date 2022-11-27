@@ -3,6 +3,7 @@
  * @copyright 2020-2022
  * @author Mike Price <dev.grumptech@gmail.com>
  * @module FSBatchHashEntryModule
+ * @private
  * @requires debug
  * @see {@link https://github.com/debug-js/debug#readme}
  * @requires is-it-check
@@ -15,7 +16,9 @@
  * @see {@link https://nodejs.org/dist/latest-v16.x/docs/api/crypto.html#crypto}
  */
 
-// External dependencies and imports.
+/**
+ * @description External dependencies and imports.
+ */
 import _debugModule from 'debug';
 import * as modPath                     from 'path';
 import {promises as _filesystemPromise} from 'fs';
@@ -37,6 +40,7 @@ const _debug = _debugModule('fs-hasher_hashDir');
 /**
  * @description Handles hashing of directories.
  * @augments FileSystemHashEntryBase
+ * @private
  */
 export class DirectoryHashEntry extends FileSystemHashEntryBase {
     /**

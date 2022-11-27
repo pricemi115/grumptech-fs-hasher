@@ -3,6 +3,7 @@
  * @copyright 2020-2022
  * @author Mike Price <dev.grumptech@gmail.com>
  * @module FSHashHelper
+ * @private
  * @requires debug
  * @see {@link https://github.com/debug-js/debug#readme}
  * @requires fs
@@ -15,18 +16,23 @@
  * @see {@link https://github.com/evdama/is-it-check}
  */
 
-// External dependencies and imports.
+/**
+ * @description External dependencies and imports.
+ */
 import _debugModule from 'debug';
 import {EventEmitter}   from 'events';
 import * as modFileSystem from 'fs';
 import * as modCrypto     from 'crypto';
 import _is from 'is-it-check';
 
-// Internal dependencies
+/**
+ * @description Internal dependencies
+ */
 import {FSNotCreatable} from './fsHashErrors.mjs';
 
 /**
  * @description Debugging function pointer for runtime related diagnostics.
+ * @private
  */
 const _debug = _debugModule('fs-hasher_hashHelper');
 
@@ -62,6 +68,7 @@ const _FILE_HASH_PROCESSING_DELAY = 10/* milliseconds */;
  * @description Enumeration of published events.
  * @readonly
  * @enum {string}
+ * @private
  */
 export const HASH_HELPER_EVENTS = {
     /* eslint-disable key-spacing */
@@ -82,6 +89,7 @@ export const HASH_HELPER_EVENTS = {
  * @description Enumeration of published events for the internal hash worker.
  * @readonly
  * @enum {string}
+ * @private
  */
 export const HASH_HELPER_INTERNAL_EVENTS = {
     /* eslint-disable key-spacing */
@@ -96,10 +104,12 @@ export const HASH_HELPER_INTERNAL_EVENTS = {
  * @event module:FSHashHelper#event:dequeued
  * @type {number}
  * @property {number} dequeCount - number of times the request has been dequeued.
+ * @private
  */
 /**
  * @description Hash request pending notification
  * @event module:FSHashHelper#event:pending
+ * @private
  */
 /**
  * @description Hash request dequeued notification
@@ -107,6 +117,7 @@ export const HASH_HELPER_INTERNAL_EVENTS = {
  * @type {object}
  * @param {number} e.status_code - code indicating request error status. 0 inficates success.
  * @param {string} e.digest - String representing the message digest
+ * @private
  */
 /**
  * @description Allows clients to submit requests to hash a file.
@@ -183,6 +194,7 @@ export class HashRequest extends EventEmitter {
  * @event module:FSHashHelper#event:done
  * @type {InternalHashWorker}
  * @property {InternalHashWorker} item - Reference to the object raising the event.
+ * @private
  */
 /**
  * @description Object to be used by the singleton hash serializer for managing the hashing of a specific request.
@@ -391,10 +403,12 @@ class InternalHashWorker extends EventEmitter {
  * @event module:FSHashHelper#event:dequeued
  * @type {number}
  * @property {number} dequeCount - number of times the request has been dequeued.
+ * @private
  */
 /**
  * @description Hash request pending notification
  * @event module:FSHashHelper#event:pending
+ * @private
  */
 /**
  * @description Hash request dequeued notification
@@ -402,6 +416,7 @@ class InternalHashWorker extends EventEmitter {
  * @type {object}
  * @param {number} e.status_code - code indicating request error status. 0 inficates success.
  * @param {string} e.digest - String representing the message digest
+ * @private
  */
 /**
  * @description Singleton to serialize all hash requests
@@ -577,6 +592,7 @@ function _destroySerializer() {
  * @description Provides static functions allowing clients to submit
  *              requests to hash a file. The request is serialized
  *              in the singleton InternalFileHasherSerializer.instance.
+ * @private
  */
 export class FileHasherSerializer {
     /**
