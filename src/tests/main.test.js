@@ -8,13 +8,13 @@ import {join as _join, dirname as _dirname} from 'node:path';
  * @private
  * @readonly
  */
- const __filename = _fileURLToPath(import.meta.url);
- /**
-  * @description Absolute path to the folder of this script file.
-  * @private
-  * @readonly
-  */
- const __dirname = _dirname(__filename);
+const __filename = _fileURLToPath(import.meta.url);
+/**
+ * @description Absolute path to the folder of this script file.
+ * @private
+ * @readonly
+ */
+const __dirname = _dirname(__filename);
 
 describe('main.mjs Tests', ()=>{
     describe('Export tests', ()=>{
