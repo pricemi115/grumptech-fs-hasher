@@ -16,6 +16,7 @@ import _debugModule from 'debug';
 import {FSTypeMismatch}                                 from './fsHashErrors.mjs';
 import {FileSystemHashEntryBase, FILE_SYSTEM_TYPES}     from './fsHashEntryBase.mjs';
 import {HashRequest, FileHasherSerializer}              from './hashHelper.mjs';
+import _is from 'is-it-check';
 
 /**
  * @private
@@ -113,12 +114,12 @@ export class FileHashEntry extends FileSystemHashEntryBase {
      */
     Compute(_algorithm = 'sha256') {
         // Validate arguments.
-        if ((!_algorithm) || (typeof(_algorithm) !== 'string')) {
+        if (_is.not.string(_algorithm)) {
             throw new FSTypeMismatch('string', typeof(_algorithm), 'fsFileHashEntry.js');
         }
 
         return (new Promise((resolve) => {
-            if (this.Source && (typeof(this.Source) === 'string') && (this.Source.length > 0) &&
+            if (_is.string(this.Source) && _is.above(this.Source.length, 0) &&
                 !this.IsBusy) {
                 this._Busy = true;
                 this._Digest = undefined;

@@ -11,6 +11,7 @@
 
 // External dependencies and imports.
 import _debugModule from 'debug';
+import _is from 'is-it-check';
 
 /**
  * @private
@@ -125,15 +126,15 @@ export class FSHashError extends TypeError {
         let msg = `Error encountered when computing the hash.`;
 
         // Append source.
-        if ((source) && (typeof(source) === 'string') ) {
+        if (_is.string(source)) {
             msg = msg.concat(` Source:'${source}'`);
         }
         // Append algorithm.
-        if ((algorithm) && (typeof(algorithm) === 'string') ) {
+        if (_is.string(algorithm)) {
             msg = msg.concat(` Algorithm:'${algorithm}'`);
         }
         // Append error detail.
-        if ((errDetail) && (typeof(errDetail) === 'string') ) {
+        if (_is.string(errDetail)) {
         // Append source.
             msg = msg.concat(` Error Detail:'${errDetail}'`);
         }

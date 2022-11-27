@@ -7,6 +7,7 @@ else {
 }
 
 import { FSHasher } from '../dist/grumptech-fs-hasher.js';
+//import { FSHasher } from '../src/main.mjs';
 import * as _filesystem from 'fs';
 import {readFileSync as _readFileSync } from 'node:fs';
 import {fileURLToPath as _fileURLToPath} from 'node:url';

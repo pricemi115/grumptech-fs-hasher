@@ -17,6 +17,7 @@ import {FSTypeMismatch}                             from './fsHashErrors.mjs';
 import {FileSystemHashEntryBase, FILE_SYSTEM_TYPES} from './fsHashEntryBase.mjs';
 import {DirectoryHashEntry}                         from './fsDirectoryHashEntry.mjs';
 import {FileHashEntry}                              from './fsFileHashEntry.mjs';
+import _is from 'is-it-check';
 
 /**
  * @private
@@ -58,7 +59,7 @@ export class BatchHashEntry extends DirectoryHashEntry {
         let mySource = '';
 
         for (const item of this._source) {
-            if (typeof(item) === 'string') {
+            if (_is.string(item)) {
                 const delimiter = ((mySource.length > 0) ? ',' : '');
                 mySource = mySource.concat(delimiter, item);
             }
@@ -78,16 +79,16 @@ export class BatchHashEntry extends DirectoryHashEntry {
      * @throws {TypeError} - If the depth not a number. Specifically an integer.
      */
     Build(source, depth) {
-        if (source && !Array.isArray(source)) {
+        if (_is.not.array(source)) {
             // The conternts of the source were already validated prior to creating
             // this opject. So no need to repeat that here. Just a quick sanity check
             // to ensure that the source is indeed an Array.
             throw new TypeError(`BatchHashEntry requires the source to be an array.`);
         }
-        if ((!typeof(depth) === 'number') || (!Number.isInteger(depth))) {
+        if (_is.not.integer(depth)) {
             throw new TypeError(`Depth must be an integer`);
         }
-        if (depth !== 0) {
+        if (_is.not.equal(depth, 0)) {
             // The BatchHashEntry 'must' be a root item.
             throw new RangeError(`BatchHashEntry must be a root item. Depth:${depth}`);
         }
@@ -110,10 +111,10 @@ export class BatchHashEntry extends DirectoryHashEntry {
                         const childBuildPromises = [];
 
                         for (const item of src) {
-                            if (item) {
+                            if (_is.existy(item)) {
                                 // Validate that each entry is a string. Redundant check, but
                                 // always a good idea.
-                                if (typeof(item) === 'string') {
+                                if (_is.string(item)) {
                                     // Get the source for this 'child'
                                     const childSource = item;
 
@@ -152,7 +153,7 @@ export class BatchHashEntry extends DirectoryHashEntry {
                                     }
 
                                     // Ensure that there is a child.
-                                    if (fsChildItem &&
+                                    if (_is.existy(fsChildItem) &&
                                         (fsChildItem instanceof FileSystemHashEntryBase)) {
                                         // Add the child the collective.
                                         this._childItems.push(fsChildItem);

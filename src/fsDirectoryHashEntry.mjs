@@ -20,6 +20,7 @@ import _debugModule from 'debug';
 import * as modPath                     from 'path';
 import {promises as _filesystemPromise} from 'fs';
 import * as modCrypto                   from 'crypto';
+import _is from 'is-it-check';
 
 // Internal dependencies
 import {FSTypeMismatch, FSHashError}                from './fsHashErrors.mjs';
@@ -151,7 +152,7 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
                                     }
 
                                     // Ensure that there is a child.
-                                    if (fsChildItem &&
+                                    if (_is.existy(fsChildItem) &&
                                         (fsChildItem instanceof FileSystemHashEntryBase)) {
                                         // Add the child the collective.
                                         this._childItems.push(fsChildItem);
@@ -211,12 +212,12 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
      */
     Compute(_algorithm = 'sha256') {
         // Validate arguments.
-        if ((!_algorithm) || (typeof(_algorithm) !== 'string')) {
+        if (_is.not.string(_algorithm)) {
             throw new FSTypeMismatch('string', typeof(_algorithm), 'fsDirectoryHashEntry.js DirectoryHashEntry::Compute');
         }
 
         return (new Promise((resolve) => {
-            if (this.Source && (typeof(this.Source) === 'string') && (this.Source.length > 0) &&
+            if (_is.string(this.Source) && _is.above(this.Source.length, 0) &&
                 !this.IsBusy) {
                 this._Busy = true;
                 this._Digest = undefined;
@@ -264,15 +265,15 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
                         this._Digest = undefined;
                         for (const result of results) {
                             // Update my working hash
-                            if (result.digest) {
+                            if (_is.existy(result.digest)) {
                                 myHash.update(result.digest);
                             }
                             // if this is the first result, then just copy the hash digest to mine.
-                            if (!this.Digest) {
+                            if (_is.not.existy(this.Digest)) {
                                 this._Digest = result.digest;
                             }
                             // Otherwise, set my digest to the running digest.
-                            else if (result.digest) {
+                            else if (_is.existy(result.digest)) {
                                 this._Digest = myHash.copy().digest('hex').toUpperCase();
                             }
                         }
@@ -319,7 +320,7 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
                 reportResults.push(myReport);
 
                 // Did this object's Report resolve properly?
-                if (myReport) {
+                if (_is.existy(myReport)) {
                     const childReportPromises = [];
                     // Note: Use the sorted list to ensure the proper traversal of the tree.
                     const children = this._Children;
@@ -337,8 +338,8 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
                     const results = await Promise.all(childReportPromises);
 
                     for (const report of results) {
-                        if (report) {
-                            if (Array.isArray(report)) {
+                        if (_is.existy(report)) {
+                            if (_is.array(report)) {
                                 // Combine the arrays, so we don't end up with nested arrays.
                                 reportResults = reportResults.concat(report);
                             }
@@ -373,7 +374,7 @@ export class DirectoryHashEntry extends FileSystemHashEntryBase {
         const fileChildren = [];
 
         for (const childItem in this._childItems) {
-            if (this._childItems[childItem] &&
+            if (_is.existy(this._childItems[childItem]) &&
                 (this._childItems[childItem] instanceof FileSystemHashEntryBase)) {
                 switch (this._childItems[childItem].Type) {
                     case FILE_SYSTEM_TYPES.DIRECTORY:

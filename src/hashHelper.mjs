@@ -20,6 +20,7 @@ import _debugModule from 'debug';
 import {EventEmitter}   from 'events';
 import * as modFileSystem from 'fs';
 import * as modCrypto     from 'crypto';
+import _is from 'is-it-check';
 
 // Internal dependencies
 import {FSNotCreatable} from './fsHashErrors.mjs';
@@ -93,7 +94,8 @@ export const HASH_HELPER_INTERNAL_EVENTS = {
 /**
  * @description Hash request dequeued notification
  * @event module:FSHashHelper#event:dequeued
- * @type {number} dequeCount - number of times the request has been dequeued.
+ * @type {number}
+ * @property {number} dequeCount - number of times the request has been dequeued.
  */
 /**
  * @description Hash request pending notification
@@ -125,19 +127,17 @@ export class HashRequest extends EventEmitter {
      */
     constructor(args) {
         // General arguments validation.
-        if ((args === undefined) || (typeof(args) !== 'object')) {
+        if (_is.not.object(args)) {
         // Error.
             throw new TypeError(`Hash request requires an 'args' parameter that is an object.`);
         }
         // Source validation.
-        if ((args.source === undefined) ||
-            (typeof(args.source) !== 'string') ||
+        if (_is.not.string(args.source) ||
             (args.source.length <= 0)) {
             throw new RangeError(`args.source must be a non-zero length string.`);
         }
         // Algorithm validation.
-        if ((args.algorithm === undefined) ||
-            (typeof(args.algorithm) !== 'string') ||
+        if (_is.not.string(args.algorithm) ||
             (args.algorithm <= 0)) {
             throw new RangeError(`args.algorithm must be a non-zero length string.`);
         }
@@ -181,7 +181,8 @@ export class HashRequest extends EventEmitter {
 /**
  * @description Hash request dequeued notification
  * @event module:FSHashHelper#event:done
- * @type {InternalHashWorker} item - Reference to the object raising the event.
+ * @type {InternalHashWorker}
+ * @property {InternalHashWorker} item - Reference to the object raising the event.
  */
 /**
  * @description Object to be used by the singleton hash serializer for managing the hashing of a specific request.
@@ -196,7 +197,7 @@ class InternalHashWorker extends EventEmitter {
      * @throws {TypeError} - Error thrown when the arguments to not conform to requirements
      */
     constructor(args) {
-        if ((args === undefined) || (typeof(args) != 'object') || !(args.request instanceof HashRequest)) {
+        if (_is.not.object(args) || !(args.request instanceof HashRequest)) {
             throw new TypeError(`Internal hash worker requires an 'args' parameter that is a HashRequest.`);
         }
 
@@ -225,7 +226,7 @@ class InternalHashWorker extends EventEmitter {
      */
     destroy() {
         // Unregister for notifications.
-        if (this._myStreamReader) {
+        if (_is.existy(this._myStreamReader)) {
             this._myStreamReader.off('data',    this._streamDataCB);
             this._myStreamReader.off('close',   this._streamClosedCB);
             this._myStreamReader.off('end',     this._streamEndCB);
@@ -261,7 +262,7 @@ class InternalHashWorker extends EventEmitter {
                     resolve(HASH_STATUS.STATUS_ERR_INVALID_ALGORITHM);
                 }
                 finally {
-                    if (this._myHash) {
+                    if (_is.existy(this._myHash)) {
                         try {
                             // Use the default options when falling readFile().
                             // Will use encoding=null & flag='r'
@@ -333,7 +334,7 @@ class InternalHashWorker extends EventEmitter {
      * @throws {ReferenceError} - thrown if the hash request is invalid
      */
     _streamData(chunk) {
-        if (this._myHash) {
+        if (_is.existy(this._myHash)) {
             this._myHash.update(chunk);
         }
         else {
@@ -348,7 +349,7 @@ class InternalHashWorker extends EventEmitter {
      * @throws {ReferenceError} - thrown if the hash request is invalid
      */
     _streamEnd() {
-        if (this._myHash) {
+        if (_is.existy(this._myHash)) {
             this._pending = false;
             // Get the digest.
             const digest = this._myHash.digest('hex').toUpperCase();
@@ -388,7 +389,8 @@ class InternalHashWorker extends EventEmitter {
 /**
  * @description Hash request dequeued notification
  * @event module:FSHashHelper#event:dequeued
- * @type {number} dequeCount - number of times the request has been dequeued.
+ * @type {number}
+ * @property {number} dequeCount - number of times the request has been dequeued.
  */
 /**
  * @description Hash request pending notification
@@ -524,7 +526,7 @@ class InternalFileHasherSerializer extends EventEmitter {
      * @returns {void}
      */
     _workerDone(args) {
-        if ((args !== undefined) && (typeof(args) === 'object') &&
+        if (_is.object(args) &&
             (args.item instanceof InternalHashWorker)) {
             // Clean up
             const worker = args.item;
@@ -563,7 +565,7 @@ InternalFileHasherSerializer._instance = null;
  * @private
  */
 function _destroySerializer() {
-    if ((InternalFileHasherSerializer._instance) &&
+    if ((_is.existy(InternalFileHasherSerializer._instance)) &&
         (!InternalFileHasherSerializer._instance.IsActive)) {
         // Cleanup.
         InternalFileHasherSerializer._instance.destroy();
@@ -600,20 +602,18 @@ export class FileHasherSerializer {
             throw new TypeError(`request needs to be an instance of <HashRequest>`);
         }
         // Source validation.
-        if ((request.Source === undefined) ||
-            (typeof(request.Source) !== 'string') ||
-            (request.Source.length <= 0)) {
+        if (_is.not.string(request.Source) ||
+            _is.under(request.Source.length, 1)) {
             throw new RangeError(`request.Source must be a non-zero length string.`);
         }
         // Algorithm validation.
-        if ((request.Algorithm === undefined) ||
-            (typeof(request.Algorithm) !== 'string') ||
-            (request.Algorithm.length <= 0)) {
+        if (_is.not.string(request.Algorithm) ||
+            _is.under(request.Algorithm, 1)) {
             throw new RangeError(`request.Algorithm must be a non-zero length string.`);
         }
 
         // Check to see if the singleton instance exists.
-        if (!InternalFileHasherSerializer._instance) {
+        if (_is.not.existy(InternalFileHasherSerializer._instance)) {
         // Create the singleton.
             InternalFileHasherSerializer._instance = new InternalFileHasherSerializer();
             InternalFileHasherSerializer._instance.once(HASH_HELPER_EVENTS.EVENT_SELF_DESTRUCT, _destroySerializer);
@@ -642,20 +642,18 @@ export class FileHasherSerializer {
             throw new TypeError(`request needs to be an instance of <HashRequest>`);
         }
         // Source validation.
-        if ((request.Source === undefined) ||
-            (typeof(request.Source) !== 'string') ||
-            (request.Source.length <= 0)) {
+        if (_is.not.string(request.source) ||
+            _is.under(request.Source.length, 1)) {
             throw new RangeError(`request.Source must be a non-zero length string.`);
         }
         // Algorithm validation.
-        if ((request.Algorithm === undefined) ||
-            (typeof(request.Algorithm) !== 'string') ||
-            (request.Algorithm.length <= 0)) {
+        if (_is.not.string(request.Algorithm) ||
+            _is.under(request.Algorithm, 1)) {
             throw new RangeError(`request.Algorithm must be a non-zero length string.`);
         }
 
         // Check to see if the instance exists and is not actively being processed.
-        if (InternalFileHasherSerializer._instance) {
+        if (_is.existy(InternalFileHasherSerializer._instance)) {
             const targetItem = InternalFileHasherSerializer._instance._requestList.find( (item) => {
                 return ((item == request) && (!item.IsPending));
             });

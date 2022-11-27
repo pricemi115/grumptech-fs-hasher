@@ -16,6 +16,7 @@ import {Hash} from 'crypto';
 import _debugModule from 'debug';
 import * as modFileSystem                from 'fs';
 import {promises as _fileSystemPromises} from 'fs';
+import _is from 'is-it-check';
 
 // Internal dependencies
 import {FSAbstract, FSTypeMismatch} from './fsHashErrors.mjs';
@@ -126,10 +127,10 @@ export class FileSystemHashEntryBase {
      * @throws {TypeError} - If the depth not a number. Specifically an integer.
      */
     Build(source, depth) {
-        if ((!typeof(depth) ==='number') || (!Number.isInteger(depth))) {
+        if (_is.not.integer(depth)) {
             throw new TypeError(`Depth must be an integer`);
         }
-        if (depth < 0) {
+        if (_is.not.above(depth, -1)) {
             throw new RangeError(`Hash entry depth must be a positive integer. Depth:${depth}`);
         }
 
@@ -189,8 +190,7 @@ export class FileSystemHashEntryBase {
      */
     Report() {
         return (new Promise((resolve) => {
-            if (this.Source && (typeof(this.Source) === 'string') && (this.Source.length > 0) &&
-                !this.IsBusy) {
+            if (_is.string(this.Source) && _is.above(this.Source.length, 0)) {
                 this._busy = true;
 
                 const report = {type: this.Type, source: this.Source, depth: this.Depth, digest: this.Digest};
@@ -218,7 +218,7 @@ export class FileSystemHashEntryBase {
      * @private
      */
     set _Digest(digest) {
-        if (digest && typeof(digest) !== 'string') {
+        if (_is.existy(digest) && _is.not.string(digest)) {
             throw new FSTypeMismatch(['string', 'falsy'], typeof(digest), 'fsHashEntryBase.js');
         }
 
@@ -235,8 +235,8 @@ export class FileSystemHashEntryBase {
      */
     static _getFileSystemType(source) {
         return (new Promise((resolve) => {
-            if ( source != null ) {
-                if (typeof(source) === 'string') {
+            if (_is.existy(source)) {
+                if (_is.string(source)) {
                     (async (src) => {
                         try {
                             // Ensure that there is read access to the specified source.
@@ -264,14 +264,14 @@ export class FileSystemHashEntryBase {
                         }
                     })(source);
                 }
-                else if (Array.isArray(source)) {
+                else if (_is.array(source)) {
                     (async (src) => {
                         // Default to assuming that this is an array of strings.
                         let result = FILE_SYSTEM_TYPES.BATCH;
 
                         for (const item of src) {
                             if (item) {
-                                if (typeof(item) === 'string') {
+                                if (_is.string(item)) {
                                     const fsType = await FileSystemHashEntryBase._getFileSystemType(item);
                                     if ((fsType !== FILE_SYSTEM_TYPES.FILE) &&
                                         (fsType !== FILE_SYSTEM_TYPES.DIRECTORY)) {

@@ -20,6 +20,7 @@ import _debugModule from 'debug';
 import {readFileSync as _readFileSync} from 'node:fs';
 import {fileURLToPath as _fileURLToPath} from 'node:url';
 import {join as _join, dirname as _dirname} from 'node:path';
+import _is from 'is-it-check';
 
 // Internal dependencies
 import {FSTypeMismatch}                             from './fsHashErrors.mjs';
@@ -134,7 +135,7 @@ class FSHasherInternal {
      */
     get IsBusy() {
         let busy = false;
-        if (this._rootSource) {
+        if (_is.existy(this._rootSource)) {
             busy = this._rootSource.IsBusy;
         }
         return ( busy );
@@ -154,7 +155,7 @@ class FSHasherInternal {
      */
     get Source() {
         let src = '';
-        if (this._rootSource) {
+        if (_is.existy(this._rootSource)) {
             src = this._rootSource.Source;
         }
         return ( src );
@@ -168,9 +169,9 @@ class FSHasherInternal {
      * @throws {TypeError} = thrown if the aeguent does not conform to expectations.
      */
     Build(source) {
-        if (source &&
-            (typeof(source) !== 'string') &&
-            (!Array.isArray(source))) {
+        if (_is.not.string(source) &&
+            _is.not.array(source)) {
+            console.log(source);
             throw new TypeError(`Build() must take a string or an array of strings.`);
         }
 
@@ -211,7 +212,7 @@ class FSHasherInternal {
 
                 // Build the tree.
                 let success = false;
-                if (this._rootSource) {
+                if (_is.not.null(this._rootSource)) {
                     // eslint-disable-next-line new-cap
                     success = await this._rootSource.Build(src, 0);
                 }
@@ -232,7 +233,7 @@ class FSHasherInternal {
     Compute(algorithm = _DEFAULT_ALGORITHM) {
         // Cache the algorithm t
         return (new Promise((resolve) => {
-            if (this._rootSource &&
+            if (_is.existy(this._rootSource) &&
                 !this._rootSource.IsBusy) {
                 this._Algorithm = algorithm;
                 (async () => {
@@ -266,7 +267,7 @@ class FSHasherInternal {
      */
     Report() {
         return (new Promise((resolve) => {
-            if (this._rootSource &&
+            if (_is.existy(this._rootSource) &&
                 !this._rootSource.IsBusy) {
                 (async () => {
                     // eslint-disable-next-line new-cap
@@ -308,7 +309,7 @@ class FSHasherInternal {
      */
     FindDuplicates() {
         return (new Promise((resolve) => {
-            if (this._rootSource &&
+            if (_is.existy(this._rootSource) &&
                 !this._rootSource.IsBusy) {
                 (async () => {
                     // Get the report from the root
@@ -324,7 +325,7 @@ class FSHasherInternal {
                         if (internalMap.has(item.digest)) {
                             // This digest has been encountered before.
                             const value = internalMap.get(item.digest);
-                            if (value && Array.isArray(value)) {
+                            if (_is.array(value)) {
                                 // Update the value by appending the duplicated source.
                                 value.push(item.source);
                                 // Update the map.
@@ -343,7 +344,7 @@ class FSHasherInternal {
                     // Generate the map to be returned that contains only repeated items.
                     const duplicatesMap = new Map();
                     internalMap.forEach((value, key) => {
-                        if (value && Array.isArray(value) && (value.length > 1)) {
+                        if (_is.array(value) && (value.length > 1)) {
                         // Duplicate found.
                             duplicatesMap.set(key, value);
                         }
@@ -370,7 +371,7 @@ class FSHasherInternal {
      */
     set _Algorithm(algorithm) {
         // Set the algorithm as specified.
-        if ( (algorithm != null) && (typeof(algorithm) === 'string') ) {
+        if (_is.string(algorithm)) {
             switch (algorithm) {
                 case HASH_ALGORITHMS.MD5:
                 case HASH_ALGORITHMS.SHA224:
@@ -479,7 +480,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             return fshasher.Version;
         }
         else {
@@ -498,7 +499,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             return fshasher.IsBusy;
         }
         else {
@@ -517,7 +518,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             return fshasher.Algorithm;
         }
         else {
@@ -536,7 +537,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             return fshasher.Source;
         }
         else {
@@ -558,7 +559,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             // eslint-disable-next-line new-cap
             return fshasher.Build(source);
         }
@@ -582,7 +583,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             // eslint-disable-next-line new-cap
             return fshasher.Compute(algorithm);
         }
@@ -613,7 +614,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             // eslint-disable-next-line new-cap
             return fshasher.Report();
         }
@@ -638,7 +639,7 @@ export class FSHasher {
         const fshasher = _internalFSHashObjs.get(this);
 
         // Ensure this object is registered.
-        if (fshasher) {
+        if (_is.existy(fshasher)) {
             // eslint-disable-next-line new-cap
             return fshasher.FindDuplicates();
         }
