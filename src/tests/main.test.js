@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 import * as _ from '../main.mjs';
 
 import {fileURLToPath as _fileURLToPath} from 'node:url';
@@ -107,6 +108,19 @@ describe('main.mjs Tests', ()=>{
         test('Duplicates Test', async () => {
             const result = await fsHasher.FindDuplicates();
             await expect(result).toBeDefined();
+        });
+    });
+
+    describe('FSHasher File Hash Error Test', ()=>{
+        const source = 'waffles';
+        const fsHasher = new _.FSHasher();
+
+        test('Error Test', () => {
+            fsHasher.destroy();
+
+            expect(() => {
+                fsHasher.Build(source).toThrow(ReferenceError);
+            });
         });
     });
 });
