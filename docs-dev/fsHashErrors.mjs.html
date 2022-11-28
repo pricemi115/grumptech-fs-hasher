@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>fsHashErrors.mjs - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/pricemi115/grumptech-fs-hasher" target="_blank" >GrumpTech</a></h2><h3>Modules</h3><ul><li><a href="module-FSBatchHashEntryModule.html">FSBatchHashEntryModule</a></li><li></li><li><a href="module-FSHashEntryBaseModule.html">FSHashEntryBaseModule</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-FSHashEntryBaseModule.html#.FILE_SYSTEM_TYPES">FILE_SYSTEM_TYPES</a></li><li data-type='member' style='display: none;'><a href="module-FSHashEntryBaseModule.html#~_debug">_debug</a></li><li data-type='member' style='display: none;'><a href="module-FSHashEntryBaseModule.html#~_debug">_debug</a></li></ul></li><li></li><li><a href="module-FSHasherAPI.html">FSHasherAPI</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#.HASH_ALGORITHMS">HASH_ALGORITHMS</a></li><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#~__dirname">__dirname</a></li><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#~__filename">__filename</a></li><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#~_debug">_debug</a></li><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#~_DEFAULT_ALGORITHM">_DEFAULT_ALGORITHM</a></li><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#~_internalFSHashObjs">_internalFSHashObjs</a></li><li data-type='member' style='display: none;'><a href="module-FSHasherAPI.html#~_PackageInfo">_PackageInfo</a></li></ul><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHasherAPI.html#~_getPackageInfo">_getPackageInfo</a></li></ul></li><li><a href="module-FSHashErrorsModule.html">FSHashErrorsModule</a></li><li><a href="module-FSHashHelper.html">FSHashHelper</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-FSHashHelper.html#.HASH_HELPER_EVENTS">HASH_HELPER_EVENTS</a></li><li data-type='member' style='display: none;'><a href="module-FSHashHelper.html#.HASH_HELPER_INTERNAL_EVENTS">HASH_HELPER_INTERNAL_EVENTS</a></li><li data-type='member' style='display: none;'><a href="module-FSHashHelper.html#.HASH_STATUS">HASH_STATUS</a></li><li data-type='member' style='display: none;'><a href="module-FSHashHelper.html#~_debug">_debug</a></li><li data-type='member' style='display: none;'><a href="module-FSHashHelper.html#~_FILE_HASH_PROCESSING_DELAY">_FILE_HASH_PROCESSING_DELAY</a></li></ul><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHashHelper.html#~_destroySerializer">_destroySerializer</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="module-FSHashHelper.html#event:event:complete">complete</a></li><li></li><li><a href="module-FSHashHelper.html#event:event:dequeued">dequeued</a></li><li></li><li><a href="module-FSHashHelper.html#event:event:done">done</a></li><li><a href="module-FSHashHelper.html#event:event:pending">pending</a></li><li></li></ul><h3>Classes</h3><ul><li><a href="module-FSBatchHashEntryModule.BatchHashEntry.html">BatchHashEntry</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSBatchHashEntryModule.BatchHashEntry.html#Build">Build</a></li></ul></li><li><a href="module-FSBatchHashEntryModule.DirectoryHashEntry.html">DirectoryHashEntry</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSBatchHashEntryModule.DirectoryHashEntry.html#Build">Build</a></li><li data-type='method' style='display: none;'><a href="module-FSBatchHashEntryModule.DirectoryHashEntry.html#Compute">Compute</a></li><li data-type='method' style='display: none;'><a href="module-FSBatchHashEntryModule.DirectoryHashEntry.html#Report">Report</a></li></ul></li><li><a href="module-FSHashEntryBaseModule.FileHashEntry.html">FileHashEntry</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileHashEntry.html#Build">Build</a></li><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileHashEntry.html#Compute">Compute</a></li><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileHashEntry.html#Report">Report</a></li></ul></li><li><a href="module-FSHashEntryBaseModule.FileSystemHashEntryBase.html">FileSystemHashEntryBase</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileSystemHashEntryBase.html#._getFileSystemType">_getFileSystemType</a></li><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileSystemHashEntryBase.html#Build">Build</a></li><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileSystemHashEntryBase.html#Compute">Compute</a></li><li data-type='method' style='display: none;'><a href="module-FSHashEntryBaseModule.FileSystemHashEntryBase.html#Report">Report</a></li></ul></li><li><a href="module-FSHasherAPI.FSHasher.html">FSHasher</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHasherAPI.FSHasher.html#Build">Build</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI.FSHasher.html#Compute">Compute</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI.FSHasher.html#destroy">destroy</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI.FSHasher.html#FindDuplicates">FindDuplicates</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI.FSHasher.html#Report">Report</a></li></ul></li><li><a href="module-FSHasherAPI-FSHasherInternal.html">FSHasherInternal</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHasherAPI-FSHasherInternal.html#_translateFSType">_translateFSType</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI-FSHasherInternal.html#Build">Build</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI-FSHasherInternal.html#Compute">Compute</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI-FSHasherInternal.html#FindDuplicates">FindDuplicates</a></li><li data-type='method' style='display: none;'><a href="module-FSHasherAPI-FSHasherInternal.html#Report">Report</a></li></ul></li><li><a href="module-FSHashErrorsModule.FSAbstract.html">FSAbstract</a></li><li><a href="module-FSHashErrorsModule.FSHashError.html">FSHashError</a></li><li><a href="module-FSHashErrorsModule.FSNotCreatable.html">FSNotCreatable</a></li><li><a href="module-FSHashErrorsModule.FSTypeMismatch.html">FSTypeMismatch</a></li><li><a href="module-FSHashHelper.FileHasherSerializer.html">FileHasherSerializer</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHashHelper.FileHasherSerializer.html#.RecindHashRequest">RecindHashRequest</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper.FileHasherSerializer.html#.SubmitHashRequest">SubmitHashRequest</a></li></ul></li><li><a href="module-FSHashHelper.HashRequest.html">HashRequest</a></li><li><a href="module-FSHashHelper-InternalFileHasherSerializer.html">InternalFileHasherSerializer</a><ul class='members'><li data-type='member' style='display: none;'><a href="module-FSHashHelper-InternalFileHasherSerializer.html#._instance">_instance</a></li><li data-type='member' style='display: none;'><a href="module-FSHashHelper-InternalFileHasherSerializer.html#IsActive">IsActive</a></li></ul><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalFileHasherSerializer.html#_workerDone">_workerDone</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalFileHasherSerializer.html#destroy">destroy</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalFileHasherSerializer.html#processRequests">processRequests</a></li></ul></li><li><a href="module-FSHashHelper-InternalHashWorker.html">InternalHashWorker</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#_streamClosed">_streamClosed</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#_streamData">_streamData</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#_streamEnd">_streamEnd</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#_streamError">_streamError</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#destroy">destroy</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#Prepare">Prepare</a></li><li data-type='method' style='display: none;'><a href="module-FSHashHelper-InternalHashWorker.html#Start">Start</a></li></ul></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-license.html">license</a></li><li><a href="tutorial-security.html">security</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">fsHashErrors.mjs</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @description Module for all FS Hasher errors.
+ * @copyright 2020-2022
+ * @author Mike Price &lt;dev.grumptech@gmail.com>
+ * @module FSHashErrorsModule
+ * @requires debug
+ * @see {@link https://github.com/debug-js/debug#readme}
+ * @requires is-it-check
+ * @see {@link https://github.com/evdama/is-it-check}
+ */
+
+/**
+ * @description External dependencies and imports.
+ */
+import _debugModule from 'debug';
+import _is from 'is-it-check';
+
+/**
+ * @private
+ * @description Debugging function pointer for runtime related diagnostics.
+ */
+// eslint-disable-next-line no-unused-vars
+const _debug = _debugModule('fs-hasher_errors');
+
+/**
+ * @description Reports errors relating to file system type mismatches.
+ * @augments TypeError
+ */
+export class FSTypeMismatch extends TypeError {
+    /**
+     * @description Constructor
+     * @param {number | number[]} expectedType - The File System Type enumerated value(s) that was expected.
+     * @param {number} observedType - The File System Type enumerated value that was observed.
+     * @param {string} [filename] - The name of the file raising the error.
+     */
+    constructor(expectedType, observedType, filename) {
+        // Initialize the base class.
+        super(`File System Type Mismatch. Expected:${expectedType} Observed:${observedType}`, filename);
+
+        // Set the members.
+        this._expectedType = expectedType;
+        this._observedType = observedType;
+    }
+
+    /**
+     * @description Read-Only Property for the expected File System Type
+     * @returns {number} - Enumerated value of the expected File System Type
+     */
+    get ExpectedType() {
+        return ( this._expectedType );
+    }
+
+    /**
+     * @description Read-Only Property for the observed File System Type
+     * @returns {number} - Enumerated value of the observed File System Type
+     */
+    get ObservedType() {
+        return ( this._observedType );
+    }
+}
+
+/**
+ * @description Reports errors relating to instantiation of an abstract (non-instancable) class or invocation an abstract function.
+ * @augments TypeError
+ */
+export class FSAbstract extends TypeError {
+    /**
+     * @description Constructor
+     * @param {string} [name="Not Specified"] -  The name of the class being instanciated or function being invoked.
+     */
+    constructor(name = 'Not Specified') {
+        // Initialize the base class.
+        super(`Attempting to instanciate an abstract class or call an abstract function: '${name}'`);
+
+        // Set the members.
+        this._name = name;
+    }
+
+    /**
+     * @description Read-Only Property for the name of the abstract class or function
+     * @returns {string} - Name of the class being instanciated or function being invoked.
+     */
+    get Name() {
+        return ( this._name );
+    }
+}
+
+/**
+ * @description Reports errors relating to instantiation of a non-creatable class.
+ * @augments TypeError
+ */
+export class FSNotCreatable extends TypeError {
+    /**
+     * @description Constructor
+     * @param {string} [name="Not Specified"] -  The name of the class being instanciated.
+     */
+    constructor(name = 'Not Specified') {
+        // Initialize the base class.
+        super(`Attempting to instanciate an non-creatable class: '${name}'`);
+
+        // Set the members.
+        this._name = name;
+    }
+
+    /**
+     * @description Read-Only Property for the name of the non-creatable class
+     * @returns {string} - Name of the class being instanciated.
+     */
+    get Name() {
+        return ( this._name );
+    }
+}
+
+/**
+ * @description Reports errors when attempting to generate a hash.
+ * @augments TypeError
+ */
+export class FSHashError extends TypeError {
+    /**
+     * @description Constructor
+     * @param {string} [source=null] - The name of the source being hashed.
+     * @param {string} [algorithm=null] - The algorithm used for hashing.
+     * @param {string} [errDetail=null] - Error detail.
+     * @param {string} [filename=null] - File generating the error.
+     */
+    constructor(source=null, algorithm=null, errDetail=null, filename=null) {
+        // Initialize the base class.
+        let msg = `Error encountered when computing the hash.`;
+
+        // Append source.
+        if (_is.string(source)) {
+            msg = msg.concat(` Source:'${source}'`);
+        }
+        // Append algorithm.
+        if (_is.string(algorithm)) {
+            msg = msg.concat(` Algorithm:'${algorithm}'`);
+        }
+        // Append error detail.
+        if (_is.string(errDetail)) {
+        // Append source.
+            msg = msg.concat(` Error Detail:'${errDetail}'`);
+        }
+        super(msg, filename);
+
+        // Set the members.
+        this._source      = source;
+        this._algorithm   = algorithm;
+        this._err_detail  = errDetail;
+        this._filename    = filename;
+    }
+
+    /**
+     * @description Read-Only Property for the source.
+     * @returns {string} - source used when hashing error was encountered.
+     */
+    get Source() {
+        return ( this._source );
+    }
+
+    /**
+     * @description Read-Only Property for the algorithm.
+     * @returns {string} - algorithm used when hashing error was encountered.
+     */
+    get Algorithm() {
+        return ( this._algorithm );
+    }
+
+    /**
+     * @description Read-Only Property for the error detail.
+     * @returns {string} - specific detailed error when hashing error was encountered.
+     */
+    get ErrorDetail() {
+        return ( this._err_detail );
+    }
+
+    /**
+     * @description Read-Only Property for the filename.
+     * @returns {string} - name of the file when raising this error.
+     */
+    get Filename() {
+        return ( this._filename );
+    }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.11</a> using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

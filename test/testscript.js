@@ -6,8 +6,26 @@ else {
   console.log(`Testing module: ${process.argv[2]}`);
 }
 
-const FSHasher = require(process.argv[2]).FSHasher;
-const _filesystem = require('fs');
+import { FSHasher } from '../dist/grumptech-fs-hasher.js';
+//import { FSHasher } from '../src/main.mjs';
+import * as _filesystem from 'fs';
+import {readFileSync as _readFileSync } from 'node:fs';
+import {fileURLToPath as _fileURLToPath} from 'node:url';
+import {EOL as _EOL} from 'node:os';
+import {join as _join, dirname as _dirname} from 'node:path';
+
+/**
+ * @description Absolute path to this script file.
+ * @private
+ * @readonly
+ */
+ const __filename = _fileURLToPath(import.meta.url);
+ /**
+  * @description Absolute path to the folder of this script file.
+  * @private
+  * @readonly
+  */
+ const __dirname = _dirname(__filename);
 
 (async () => {
   let fsHasher = new FSHasher();
