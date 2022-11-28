@@ -11,7 +11,8 @@
     "README.md",
     "CHANGELOG.md",
     "LICENSE.md",
-    "SECURITY.md"
+    "SECURITY.md",
+    "docs/"
   ],
   "scripts": {
     "prepare": "npm run build",
