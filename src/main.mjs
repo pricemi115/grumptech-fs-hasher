@@ -19,9 +19,6 @@
  * @description External dependencies and imports.
  */
 import _debugModule from 'debug';
-import {readFileSync as _readFileSync} from 'node:fs';
-import {fileURLToPath as _fileURLToPath} from 'node:url';
-import {join as _join, dirname as _dirname} from 'node:path';
 import _is from 'is-it-check';
 
 // Internal dependencies
@@ -32,19 +29,6 @@ import {DirectoryHashEntry}                         from './fsDirectoryHashEntry
 import {BatchHashEntry}                             from './fsBatchHashEntry.mjs';
 
 /**
- * @description Absolute path to this script file.
- * @private
- * @readonly
- */
-const __filename = _fileURLToPath(import.meta.url);
-/**
- * @description Absolute path to the folder of this script file.
- * @private
- * @readonly
- */
-const __dirname = _dirname(__filename);
-
-/**
  * @description Debugging function pointer for runtime related diagnostics.
  * @private
  * @readonly
@@ -52,26 +36,11 @@ const __dirname = _dirname(__filename);
 const _debug = _debugModule('fs-hasher_main');
 
 /**
- * @description Helper to get the information of interest from the package.json file.
- * @returns {object} Data of interest.
- * @private
- */
-function _getPackageInfo() {
-    const packageFilename = _join(__dirname, '../package.json');
-    const rawContents = _readFileSync(packageFilename);
-    const parsedData = JSON.parse(rawContents);
-
-    const pkgInfo = {CONFIG_INFO: parsedData.config_info, PLUGIN_VER: parsedData.version};
-
-    return pkgInfo;
-}
-
-/**
  * @description Package Information
  * @readonly
  * @private
  */
-const _PackageInfo = _getPackageInfo();
+const _PackageInfo = {CONFIG_INFO: PLACEHOLDER_CONFIG_INFO, PLUGIN_VER: 'PLACEHOLDER_VERSION'};
 
 /**
  * @description Enumeration of hashing algorithms

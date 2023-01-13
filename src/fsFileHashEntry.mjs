@@ -54,7 +54,7 @@ export class FileHashEntry extends FileSystemHashEntryBase {
      * @description Build a heirarchy of file system entries based upon the source
      * @param {string | string[]} source - Array containing the list of files/directories to be hashed.
      * @param {number} depth - Depth of this object in the tree.
-     * @returns {Promise} - A promise that when resolved from the base class will indicate the File System Type of the source specified.
+     * @returns {Promise} - A promise that when resolved will indicate if the source is a file or not.
      * @throws {FSTypeMismatch} - File System Type Mismatch.
      */
     Build(source, depth) {
