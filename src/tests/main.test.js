@@ -1,5 +1,5 @@
 /* eslint-disable new-cap */
-import * as _ from '../main.mjs';
+import * as _ from '../../dist/grumptech-fs-hasher.js';
 
 import {fileURLToPath as _fileURLToPath} from 'node:url';
 import {join as _join, dirname as _dirname} from 'node:path';

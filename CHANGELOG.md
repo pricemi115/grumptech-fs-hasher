@@ -2,6 +2,11 @@
 Change history for GrumpTech FS-Hasher
 ---
 ---
+## [1.1.2] 2025-SEP-03
+### What's new
+- Dependency cleanup.
+
+---
 ## [1.1.0] 2022-NOV-27
 ### What's new
 - Dependency cleanup, JSDoc integration, and Jest Unit Test integration
